@@ -5,7 +5,9 @@ r = requests.get('http://qiita.com/advent-calendar/2016/crawler')
 
 soup = BeautifulSoup(r.content, "html.parser")
 
-soups = [i.get_text() for i in soup.find_all('a',rel = 'noopener noreferrer')]
+soups = [i.get_text() for i in soup.select("[rel='noopener noreferrer']")]
+#soups = [i.get_text() for i in soup.find_all('a',rel = 'noopener noreferrer')]
+
 # リスト内包表記：以下と同等
 #
 #soups=[]
