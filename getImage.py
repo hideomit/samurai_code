@@ -15,7 +15,7 @@ soup = BeautifulSoup(r.content, "html.parser")
 
 links = [url.get('src') for url in soup.select('.app-icon')]
 names = [i.get_text().strip('\n').replace(" ","") for i in soup.select('.go_dl.h40')]
-
+# 改行と空白を削除
 
 #for i in names:
 #    print(i)
@@ -27,6 +27,7 @@ for url,name in zip(links[:100],names[:100]):
     time.sleep(1)
     r = requests.get(url)
     filename = 'images/' + str(names.index(name) + 1) + "." + name.replace("/","") + '.jpg'
+# ファイル名に"/"が入るとディレクトリと誤解されてしまうため、削除
 
     if r.status_code == 200:
         f = open(filename,'wb')
